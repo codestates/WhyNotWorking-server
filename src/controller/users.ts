@@ -22,7 +22,7 @@ export const controller = {
           offset = 36 * (pageNum - 1);
         }
         const data = await User.findAll({
-          attributes: ["id", "nickname", "email", "image", "location"],
+          attributes: { exclude: ["password"] },
           include: [{
             model: Tag,
             attributes: ["tagName"],
@@ -34,7 +34,7 @@ export const controller = {
         res.status(200).json({ data: data, message: "ok" });
       } else if(req.query.user_id) {
         const data = await User.findOne({
-          attributes: ["id", "nickname", "email", "image", "aboutMe", "location"],
+          attributes: { exclude: ["password"] },
           include: [{
             model: Tag,
             through: { attributes: [] }

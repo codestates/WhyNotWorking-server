@@ -33,7 +33,7 @@ exports.controller = {
                     offset = 36 * (pageNum - 1);
                 }
                 const data = yield User_1.User.findAll({
-                    attributes: ["id", "nickname", "email", "image", "location"],
+                    attributes: { exclude: ["password"] },
                     include: [{
                             model: Tag_1.Tag,
                             attributes: ["tagName"],
@@ -46,7 +46,7 @@ exports.controller = {
             }
             else if (req.query.user_id) {
                 const data = yield User_1.User.findOne({
-                    attributes: ["id", "nickname", "email", "image", "aboutMe", "location"],
+                    attributes: { exclude: ["password"] },
                     include: [{
                             model: Tag_1.Tag,
                             through: { attributes: [] }
